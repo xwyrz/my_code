@@ -6,22 +6,52 @@ Usage: youtube-dl [OPTIONS] URL [URL...]
 
 Options:
   通用选项:
-    -h, --help                       打印帮助文档
-    --version                        打印版本信息
-    -U, --update                     更新到最新版(需要权限)
-    -i, --ignore-errors              遇到下载错误时跳过
-    --abort-on-error                 遇到下载错误时终止
-    --dump-user-agent                显示当前使用的浏览器(User-agent)
-    --list-extractors                列出所有的提取器(支持的网站)
-    --extractor-descriptions         同上
-    --force-generic-extractor        强制使用通用提取器下载
-    --default-search PREFIX          使用此前缀补充不完整的URLs，例如："ytsearch2 yt-dl" 从youtube搜索并下载两个关于yt-dl视频. 使用"auto"youtube-dl就会猜一个，一般效果等价于"ytsearch"("auto_warning"猜测时加入警告).我已知支持的PREFIX：ytsearch (youtube), ytsearchdate (youtube), yvsearch (yahoo videos), gvsearch (google videos)
-    --ignore-config                  不读取配置文件，当时用了全局配置文件/etc/youtube-dl.conf:不再读取 ~/.config/youtube-dl/config (%APPDATA%/youtube-dl/config.txt on Windows)
-    --config-location PATH           使用指定路径下的配置文件
-    --flat-playlist                  列出列表视频但不下载
-    --mark-watched                   标记看过此视频 (YouTube only)
-    --no-mark-watched                不标记看过此视频 (YouTube only)
-    --no-color                       打印到屏幕上的代码不带色
+    -h, --help                       
+    打印帮助文档
+    
+    --version                        
+    打印版本信息
+    
+    -U, --update                     
+    更新到最新版(需要权限)
+    
+    -i, --ignore-errors              
+    遇到下载错误时跳过
+    
+    --abort-on-error                 
+    遇到下载错误时终止
+    
+    --dump-user-agent                
+    显示当前使用的浏览器(User-agent)
+    --list-extractors                
+    列出所有的提取器(支持的网站)
+    
+    --extractor-descriptions         
+    同上
+    
+    --force-generic-extractor        
+    强制使用通用提取器下载
+    
+    --default-search PREFIX          
+使用此前缀补充不完整的URLs，例如："ytsearch2 yt-dl" 从youtube搜索并下载两个关于yt-dl视频. 使      用"auto"youtube-dl就会猜一个，一般效果等价于"ytsearch"("auto_warning"猜测时加入警告).我已知支持的PREFIX：ytsearch (youtube), ytsearchdate (youtube), yvsearch (yahoo videos), gvsearch (google videos)
+    
+    --ignore-config                  
+ 不读取配置文件，当时用了全局配置文件/etc/youtube-dl.conf:不再读取 ~/.config/youtube-dl/config (%APPDATA%/youtube-dl/config.txt on Windows)
+ 
+    --config-location PATH           
+    使用指定路径下的配置文件
+    
+    --flat-playlist                  
+    列出列表视频但不下载
+    
+    --mark-watched                   
+    标记看过此视频 (YouTube only)
+    
+    --no-mark-watched                
+    不标记看过此视频 (YouTube only)
+    
+    --no-color                       
+    打印到屏幕上的代码不带色
 
   网络选项:
     --proxy URL                      使用HTTP/HTTPS/SOCKS协议的代理.如：socks5://127.0.0.1:1080/.
