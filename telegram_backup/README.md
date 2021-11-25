@@ -16,8 +16,10 @@ git clone https://github.com/snow922841/telegram_backup.git
 
 进入脚本目录
 cd telegram_backup
+
 安装依赖
 pip3 install -r requirements.txt
+
 修改telegram_backup.py文件内的 api_id 和 api_hash 为你自己的
 
 运行
