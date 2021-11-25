@@ -1,0 +1,6 @@
+telethon
+cryptg
+pillow
+aiohttp
+hachoir
+python-socks[asyncio]
