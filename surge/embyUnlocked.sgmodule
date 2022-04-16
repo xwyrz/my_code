@@ -2,7 +2,7 @@
 #!desc=embyPremiereUnlock
 
 [Script]
-embyPremiere.js = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://subweb.s3.fr-par.scw.cloud/Script/embyPremiere.js
+embyPremiere.js = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/snow922841/my_code/master/surge/embyPremiere.js
 
 [MITM]
 hostname = %APPEND% mb3admin.com
