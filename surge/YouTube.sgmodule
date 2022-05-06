@@ -17,6 +17,25 @@ URL-REGEX,https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adformat,REJECT
 URL-REGEX,https?:\/\/[\w-]+\.googlevideo\.com\/.+&oad,REJECT-TINYGIF
 AND,((PROTOCOL,UDP), (DEST-PORT,443)),REJECT-NO-DROP
 
+// 爱阅书香去AD
+DOMAIN-KEYWORD,appapisdk.tanv.com,REJECT
+DOMAIN-KEYWORD,appsdk.tanv.com,REJECT
+DOMAIN-KEYWORD,extlog.snssdk.com,REJECT
+DOMAIN-KEYWORD,googleads.g.doubleclick.net,REJECT
+DOMAIN-KEYWORD,img.adnyg.com,REJECT
+DOMAIN-KEYWORD,img2.tanv.com,REJECT
+DOMAIN-KEYWORD,pgdt.ugdtimg.com,REJECT
+DOMAIN-KEYWORD,sss.bxmns.com,REJECT
+DOMAIN-KEYWORD,t.appsflyer.com,REJECT
+DOMAIN-KEYWORD,alogs.umengcloud.com,REJECT
+DOMAIN-KEYWORD,umeng.com,REJECT
+DOMAIN-KEYWORD,gdt.qq.com,REJECT
+DOMAIN-KEYWORD,ios.bugly.qq.com,REJECT
+DOMAIN-KEYWORD,dp3.qq.com,REJECT
+DOMAIN-KEYWORD,pingma.qq.com,REJECT
+DOMAIN-KEYWORD,sdk.e.qq.com,REJECT
+DOMAIN-KEYWORD,app-measurement.com,REJECT
+
 [URL Rewrite]
 ctier=[A-Z] citer=A 302
 
