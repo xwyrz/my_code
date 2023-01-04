@@ -80,10 +80,6 @@ check_status() {
     fi
 }
 
-install_acme() {
-    curl https://github.com/xwyrz/my_code/blob/master/vps/soga/install_hk.sh | sh
-}
-
 install_soga() {
     cd /usr/local/
     if [[ -e /usr/local/soga/ ]]; then
@@ -163,5 +159,4 @@ install_soga() {
 
 echo -e "${green}开始安装${plain}"
 install_base
-install_acme
 install_soga $1
