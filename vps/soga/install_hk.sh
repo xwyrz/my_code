@@ -81,7 +81,7 @@ check_status() {
 }
 
 install_acme() {
-    curl https://gitee.com/neilpang/acme.sh | sh
+    curl https://github.com/xwyrz/my_code/blob/master/vps/soga/install_hk.sh | sh
 }
 
 install_soga() {
