@@ -30,9 +30,7 @@ DOMAIN-KEYWORD,17track,DIRECT
 DOMAIN-SUFFIX,github.com,AUTO
 DOMAIN-SUFFIX,instagram.com,AUTO
 DOMAIN-SUFFIX,freenom.com,AUTO
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,Telegram
-RULE-SET,https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list,REJECT
-RULE-SET,https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TikTok.list,TikTok
+
 AND,((IP-CIDR,0.0.0.0/0), (USER-AGENT,TBClient*)),REJECT-TINYGIF
 URL-REGEX,^https?:\/\/c\.tieba\.baidu\.com\/(c\/(s\/splashSchedule|f\/forum\/getAdInfo)|w+\/\w+\/(sync|newRnSync|newlog|mlog)),REJECT-TINYGIF
 URL-REGEX,^http:\/\/[\s\S]*\.baidu\.com/.*ad[xs]\.php,REJECT-TINYGIF
@@ -56,10 +54,3 @@ URL-REGEX,https://(api|www).zhihu.com/(fringe|zst|commercial|real_time|ad-style-
 AND,((USER-AGENT,ZhihuHybrid*), (NOT,((DOMAIN-SUFFIX,zhihu.com))), (NOT,((DOMAIN-SUFFIX,zhimg.com)))),REJECT
 AND,((USER-AGENT,osee2*), (NOT,((DOMAIN-SUFFIX,zhihu.com))), (NOT,((DOMAIN-SUFFIX,zhimg.com)))),REJECT
 AND,((USER-AGENT,pixiv*), (NOT,((DOMAIN-KEYWORD,pixiv)))),REJECT-TINYGIF
-RULE-SET,https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list,REJECT
-RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list,Netflix
-DOMAIN-SUFFIX,cn,DIRECT
-# GeoIP China
-IP-CIDR,192.168.50.1/24,DIRECT,no-resolve
-GEOIP,CN,DIRECT
-FINAL,漏网之鱼,dns-failed
