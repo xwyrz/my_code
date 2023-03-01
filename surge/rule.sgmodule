@@ -1,0 +1,65 @@
+#!name=自用分流规则
+#!desc=my rule
+#!system=ios
+
+[Rule]
+// openai
+DOMAIN-SUFFIX, openai.com, 手动切换
+DOMAIN-SUFFIX, ai.com,  手动切换
+DOMAIN, cdn.auth0.com, 手动切换
+DOMAIN, openaiapi-site.azureedge.net, 手动切换
+// new bing
+DOMAIN-SUFFIX, bing.com, 手动切换
+// Direct
+DOMAIN-KEYWORD,jkboy.com,DIRECT
+DOMAIN-SUFFIX,jd.com,DIRECT
+DOMAIN-KEYWORD,bbbe.top,DIRECT
+DOMAIN-KEYWORD,oracle,DIRECT
+DOMAIN-KEYWORD,abchina,DIRECT
+DOMAIN-SUFFIX,bankcomm.com,DIRECT
+DOMAIN-SUFFIX,huya.com,DIRECT
+DOMAIN-KEYWORD,dynadot,DIRECT
+DOMAIN-KEYWORD,spartanhost,DIRECT
+DOMAIN,greencloudvps.com,DIRECT
+DOMAIN-SUFFIX,aliyundrive.com,DIRECT
+DOMAIN-SUFFIX,microsoft.com,DIRECT
+DOMAIN,mlife.cmbchina.com,DIRECT
+DOMAIN-SUFFIX,cmbchina.com,DIRECT
+DOMAIN-KEYWORD,17track,DIRECT
+// proxy
+DOMAIN-SUFFIX,github.com,AUTO
+DOMAIN-SUFFIX,instagram.com,AUTO
+DOMAIN-SUFFIX,freenom.com,AUTO
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,Telegram
+RULE-SET,https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list,REJECT
+RULE-SET,https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Surge/TikTok.list,TikTok
+AND,((IP-CIDR,0.0.0.0/0), (USER-AGENT,TBClient*)),REJECT-TINYGIF
+URL-REGEX,^https?:\/\/c\.tieba\.baidu\.com\/(c\/(s\/splashSchedule|f\/forum\/getAdInfo)|w+\/\w+\/(sync|newRnSync|newlog|mlog)),REJECT-TINYGIF
+URL-REGEX,^http:\/\/[\s\S]*\.baidu\.com/.*ad[xs]\.php,REJECT-TINYGIF
+URL-REGEX,^https?://c.tieba.baidu.com/c/s/splashSchedule,REJECT-TINYGIF
+URL-REGEX,^https?://cover.baidu.com/cover/page/dspSwitchAds/,REJECT-TINYGIF
+# > Proxy
+PROCESS-NAME,v2ray,DIRECT
+PROCESS-NAME,ss-local,DIRECT
+# > Download
+PROCESS-NAME,aria2c,DIRECT
+PROCESS-NAME,fdm,DIRECT
+PROCESS-NAME,Folx,DIRECT
+PROCESS-NAME,NetTransport,DIRECT
+PROCESS-NAME,Thunder,DIRECT
+PROCESS-NAME,Transmission,DIRECT
+PROCESS-NAME,uTorrent,DIRECT
+PROCESS-NAME,WebTorrent,DIRECT
+PROCESS-NAME,WebTorrent Helper,DIRECT
+URL-REGEX,https://app.bilibili.com/(pgc/season/rank/cn|x/v2/(rank.*rid=(168|5)|search/(defaultword|hot|recommend|resource))),REJECT
+URL-REGEX,https://(api|www).zhihu.com/(fringe|zst|commercial|real_time|ad-style-service|banners|topstory/hot-lists|market/popover|mqtt|.*(launch|featured-comment-ad|recommendations|community-ad)|search/(top|tab|preset)|ab),REJECT
+AND,((USER-AGENT,ZhihuHybrid*), (NOT,((DOMAIN-SUFFIX,zhihu.com))), (NOT,((DOMAIN-SUFFIX,zhimg.com)))),REJECT
+AND,((USER-AGENT,osee2*), (NOT,((DOMAIN-SUFFIX,zhihu.com))), (NOT,((DOMAIN-SUFFIX,zhimg.com)))),REJECT
+AND,((USER-AGENT,pixiv*), (NOT,((DOMAIN-KEYWORD,pixiv)))),REJECT-TINYGIF
+RULE-SET,https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list,REJECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list,Netflix
+DOMAIN-SUFFIX,cn,DIRECT
+# GeoIP China
+IP-CIDR,192.168.50.1/24,DIRECT,no-resolve
+GEOIP,CN,DIRECT
+FINAL,漏网之鱼,dns-failed

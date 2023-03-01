@@ -1,8 +1,0 @@
-// openai
-DOMAIN-SUFFIX, openai.com, 手动切换
-DOMAIN-SUFFIX, ai.com,  手动切换
-DOMAIN, cdn.auth0.com, 手动切换
-DOMAIN, openaiapi-site.azureedge.net, 手动切换
-
-// new bing
-DOMAIN-SUFFIX, bing.com, 手动切换
