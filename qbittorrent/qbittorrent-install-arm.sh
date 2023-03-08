@@ -14,7 +14,7 @@ After=network.target
 [Service]
 LimitNOFILE=512000
 User=root
-ExecStart=/root/x86_64-qbittorrent-nox
+ExecStart=/root/armhf-qbittorrent-nox
 
 [Install]
 WantedBy=multi-user.target
