@@ -1,0 +1,9 @@
+#!name=爱阅书香去广告
+#!desc=
+
+[Script]
+爱阅跳广告直接领取 = type=http-response,script-path=https://gist.githubusercontent.com/Mattraks/cf41ab5f29271cbfc13922075c54523e/raw/kp.js,pattern=^https:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/union\/sdk\/get_ads.+,requires-body=true,enable=true
+
+[MITM]
+enable = true
+hostname = api-access.pangolin-sdk-toutiao.com
