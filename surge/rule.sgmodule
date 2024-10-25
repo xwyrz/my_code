@@ -4,14 +4,13 @@
 
 [Rule]
 // openai
-DOMAIN-SUFFIX, openai.com, 手动切换
-DOMAIN-SUFFIX, ai.com,  手动切换
-DOMAIN, cdn.auth0.com, 手动切换
-DOMAIN, openaiapi-site.azureedge.net, 手动切换
+DOMAIN-SUFFIX, openai.com, OpenAI
+DOMAIN-SUFFIX, ai.com,  OpenAI
+DOMAIN, cdn.auth0.com, OpenAI
+DOMAIN, openaiapi-site.azureedge.net, OpenAI
 // new bing
 DOMAIN-SUFFIX, bing.com, 手动切换
 // Direct
-DOMAIN-KEYWORD,jkboy.com,DIRECT
 DOMAIN-SUFFIX,jd.com,DIRECT
 DOMAIN-KEYWORD,bbbe.top,DIRECT
 DOMAIN-KEYWORD,oracle,DIRECT
