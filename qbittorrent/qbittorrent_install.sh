@@ -7,26 +7,32 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# 定义架构名称
-arch="$(uname -m)"
+# 定义架构名称（转换为小写以统一比较）
+arch=$(uname -m | tr '[:upper:]' '[:lower:]')
 
 echo -e "${BLUE}检测系统架构...${NC}"
 echo -e "当前架构: ${YELLOW}$arch${NC}"
 
-# 根据架构名称选择下载地址
-if [ "$arch" == "arm64" ] || [ "$arch" == "aarch64" ]; then
-  url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/arm64-qbittorrent-nox"
-  echo -e "${GREEN}检测到ARM64/aarch64架构${NC}"
-elif [ "$arch" == "armhf" ]; then
-  url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/armhf-qbittorrent-nox"
-  echo -e "${GREEN}检测到ARMHF架构${NC}"
-elif [ "$arch" == "amd64" ] || [ "$arch" == "x86_64" ]; then
-  url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/x86_64-qbittorrent-nox"
-  echo -e "${GREEN}检测到AMD64/x86_64架构${NC}"
-else
-  echo -e "${RED}错误：不支持的架构类型：$arch${NC}"
-  exit 1
-fi
+# 根据架构名称选择下载地址（使用更灵活的匹配方式）
+case "$arch" in
+    "arm64"|"aarch64")
+        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/arm64-qbittorrent-nox"
+        echo -e "${GREEN}检测到ARM64/aarch64架构${NC}"
+        ;;
+    "arm"|"armv7l"|"armhf")
+        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/armhf-qbittorrent-nox"
+        echo -e "${GREEN}检测到ARMHF架构${NC}"
+        ;;
+    "amd64"|"x86_64")
+        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/x86_64-qbittorrent-nox"
+        echo -e "${GREEN}检测到AMD64/x86_64架构${NC}"
+        ;;
+    *)
+        echo -e "${RED}错误：不支持的架构类型：$arch${NC}"
+        echo -e "${YELLOW}支持的架构包括: arm64/aarch64, armhf, amd64/x86_64${NC}"
+        exit 1
+        ;;
+esac
 
 # 下载qbittorrent-nox并赋予可执行权限
 echo -e "${BLUE}开始下载qBittorrent...${NC}"
