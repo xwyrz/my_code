@@ -4,7 +4,7 @@
 arch="$(uname -m)"
 
 # 根据架构名称选择下载地址
-if [ "$arch" == "arm64" ]; then
+if [ "$arch" == "arm64" ] || [ "$arch" == "aarch64" ]; then
   url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/arm64-qbittorrent-nox"
 elif [ "$arch" == "armhf" ]; then
   url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/armhf-qbittorrent-nox"
@@ -12,12 +12,12 @@ elif [ "$arch" == "amd64" ] || [ "$arch" == "x86_64" ]; then
   url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/x86_64-qbittorrent-nox"
 else
   echo "不支持的架构类型：$arch"
-  exit
+  exit 1
 fi
 
 # 下载qbittorrent-nox并赋予可执行权限
-cd /root
-wget "$url" -O qbittorrent-nox
+cd /root || { echo "无法进入/root目录"; exit 1; }
+wget "$url" -O qbittorrent-nox || { echo "下载失败"; exit 1; }
 chmod +x qbittorrent-nox
 
 # 配置systemd服务
