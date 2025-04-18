@@ -16,15 +16,15 @@ echo -e "当前架构: ${YELLOW}$arch${NC}"
 # 根据架构名称选择下载地址（使用更灵活的匹配方式）
 case "$arch" in
     "arm64"|"aarch64")
-        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/arm64-qbittorrent-nox"
+        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v1.2.17/aarch64-qbittorrent-nox"
         echo -e "${GREEN}检测到ARM64/aarch64架构${NC}"
         ;;
     "arm"|"armv7l"|"armhf")
-        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/armhf-qbittorrent-nox"
+        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v1.2.17/armv7-qbittorrent-nox"
         echo -e "${GREEN}检测到ARMHF架构${NC}"
         ;;
     "amd64"|"x86_64")
-        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/x86_64-qbittorrent-nox"
+        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v1.2.17/x86_64-qbittorrent-nox"
         echo -e "${GREEN}检测到AMD64/x86_64架构${NC}"
         ;;
     *)
