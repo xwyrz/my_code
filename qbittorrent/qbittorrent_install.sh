@@ -24,7 +24,7 @@ case "$arch" in
         echo -e "${GREEN}检测到ARMHF架构${NC}"
         ;;
     "amd64"|"x86_64")
-        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v1.2.17/x86_64-qbittorrent-nox"
+        url="https://dav.kz.cx/qbittorrent/x86_64-qbittorrent-nox"
         echo -e "${GREEN}检测到AMD64/x86_64架构${NC}"
         ;;
     *)
