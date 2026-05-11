@@ -12,7 +12,7 @@ DOMAIN, openaiapi-site.azureedge.net, OpenAI
 DOMAIN-SUFFIX, bing.com, 手动切换
 // Direct
 DOMAIN-SUFFIX,jd.com,DIRECT
-DOMAIN-KEYWORD,bbbe.top,DIRECT
+// DOMAIN-KEYWORD,bbbe.top,DIRECT
 DOMAIN-KEYWORD,oracle,DIRECT
 DOMAIN-KEYWORD,abchina,DIRECT
 DOMAIN-SUFFIX,bankcomm.com,DIRECT
