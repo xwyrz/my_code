@@ -24,7 +24,7 @@ case "$arch" in
         echo -e "${GREEN}检测到ARMHF架构${NC}"
         ;;
     "amd64"|"x86_64")
-        url="https://dav.kz.cx/qbittorrent/x86_64-qbittorrent-nox"
+        url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/x86_64-qbittorrent-nox"
         echo -e "${GREEN}检测到AMD64/x86_64架构${NC}"
         ;;
     *)
@@ -46,12 +46,15 @@ echo -e "${BLUE}配置systemd服务...${NC}"
 cat << "EOF" > /etc/systemd/system/qbittorrent.service
 [Unit]
 Description=qBittorrent Daemon Service
-After=network.target
+After=network.target network-online.target
+Wants=network-online.target
 
 [Service]
 LimitNOFILE=512000
 User=root
 ExecStart=/root/qbittorrent-nox
+Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
@@ -60,9 +63,12 @@ EOF
 # 更新配置并启动服务
 echo -e "${BLUE}启动qBittorrent服务...${NC}"
 systemctl daemon-reload
+systemctl enable qbittorrent
 systemctl start qbittorrent
 echo -e "${GREEN}服务已启动${NC}"
 echo -e "${YELLOW}服务状态如下：${NC}"
 systemctl status qbittorrent --no-pager
 
 echo -e "\n${GREEN}安装完成！${NC}"
+echo -e "${YELLOW}默认 WebUI 端口通常为: 8080${NC}"
+echo -e "${YELLOW}默认用户名: admin , 默认密码: adminadmin (新版本可能在日志中生成临时密码，请留意上方状态栏)${NC}"
