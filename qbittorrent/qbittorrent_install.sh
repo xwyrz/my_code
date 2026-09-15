@@ -51,20 +51,29 @@ esac
 
 echo -e "${GREEN}已选择 qBittorrent 版本: $qb_version${NC}"
 
-# 根据版本和架构拼接下载地址
-# 说明：userdocs/qbittorrent-nox-static 的 release tag 形如 release-<qb>_v<libtorrent>
-# 4.4.5 对应 libtorrent 1.2.17；5.2.0 对应 libtorrent 2.0.11
+# 根据版本和架构直接指定下载地址（硬编码，不做拼接）
 case "$qb_version" in
     "4.4.5")
-        lt_version="1.2.17"
+        case "$arch_tag" in
+            "aarch64")
+                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/aarch64-qbittorrent-nox"
+                ;;
+            "x86_64")
+                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.4.5_v2.0.8/x86_64-qbittorrent-nox"
+                ;;
+        esac
         ;;
     "5.2.0")
-        lt_version="2.0.11"
+        case "$arch_tag" in
+            "aarch64")
+                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-5.2.0_v1.2.20/aarch64-qbittorrent-nox"
+                ;;
+            "x86_64")
+                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-5.2.0_v1.2.20/x86_64-qbittorrent-nox"
+                ;;
+        esac
         ;;
 esac
-
-base_url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-${qb_version}_v${lt_version}"
-url="${base_url}/${arch_tag}-qbittorrent-nox"
 
 echo -e "${BLUE}下载地址: ${YELLOW}$url${NC}"
 
@@ -104,6 +113,6 @@ echo -e "${YELLOW}服务状态如下：${NC}"
 systemctl status qbittorrent --no-pager
 
 echo -e "\n${GREEN}安装完成！${NC}"
-echo -e "${YELLOW}已安装版本: qBittorrent $qb_version (libtorrent $lt_version)${NC}"
+echo -e "${YELLOW}已安装版本: qBittorrent $qb_version${NC}"
 echo -e "${YELLOW}默认 WebUI 端口通常为: 8080${NC}"
 echo -e "${YELLOW}默认用户名: admin , 默认密码: adminadmin (新版本可能在日志中生成临时密码，请留意上方状态栏)${NC}"
