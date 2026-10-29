@@ -7,6 +7,50 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# ================= 模式选择 =================
+echo -e "${BLUE}请选择操作模式：${NC}"
+echo -e "  ${GREEN}1)${NC} 安装 qBittorrent"
+echo -e "  ${GREEN}2)${NC} 卸载 qBittorrent"
+read -rp "请输入选项 [1-2] (默认 1): " mode_choice
+
+if [[ "$mode_choice" == "2" ]]; then
+    # ================= 卸载流程 =================
+    echo -e "${BLUE}开始卸载 qBittorrent...${NC}"
+
+    # 1. 停止服务
+    if systemctl is-active --quiet qbittorrent 2>/dev/null; then
+        echo -e "停止 qbittorrent 服务..."
+        systemctl stop qbittorrent
+    fi
+
+    # 2. 禁用开机自启
+    if systemctl is-enabled --quiet qbittorrent 2>/dev/null; then
+        echo -e "禁用 qbittorrent 开机自启..."
+        systemctl disable qbittorrent
+    fi
+
+    # 3. 删除 systemd 服务文件
+    SERVICE_FILE="/etc/systemd/system/qbittorrent.service"
+    if [[ -f "$SERVICE_FILE" ]]; then
+        echo -e "删除服务文件: $SERVICE_FILE"
+        rm -f "$SERVICE_FILE"
+    fi
+
+    # 4. 删除二进制文件
+    BINARY_FILE="/root/qbittorrent-nox"
+    if [[ -f "$BINARY_FILE" ]]; then
+        echo -e "删除程序文件: $BINARY_FILE"
+        rm -f "$BINARY_FILE"
+    fi
+
+    # 5. 重载 systemd
+    systemctl daemon-reload
+    echo -e "${GREEN}卸载完成。${NC}"
+    echo -e "${YELLOW}注意：配置文件（如 ~/.config/qBittorrent/）未被删除，如需彻底清理请手动删除。${NC}"
+    exit 0
+fi
+
+# ================= 安装流程 =================
 # 定义架构名称（转换为小写以统一比较）
 arch=$(uname -m | tr '[:upper:]' '[:lower:]')
 
@@ -33,12 +77,12 @@ esac
 # 选择 qBittorrent 版本
 echo -e "${BLUE}请选择要安装的 qBittorrent 版本：${NC}"
 echo -e "  ${GREEN}1)${NC} 4.4.5"
-echo -e "  ${GREEN}2)${NC} 5.2.0"
+echo -e "  ${GREEN}2)${NC} 5.1.4"
 read -rp "请输入选项 [1-2] (默认 1): " version_choice
 
 case "$version_choice" in
     "2")
-        qb_version="5.2.0"
+        qb_version="5.1.4"
         ;;
     "1"|"")
         qb_version="4.4.5"
@@ -51,7 +95,7 @@ esac
 
 echo -e "${GREEN}已选择 qBittorrent 版本: $qb_version${NC}"
 
-# 根据版本和架构直接指定下载地址（硬编码，不做拼接）
+# 根据版本和架构直接指定下载地址
 case "$qb_version" in
     "4.4.5")
         case "$arch_tag" in
@@ -63,13 +107,14 @@ case "$qb_version" in
                 ;;
         esac
         ;;
-    "5.2.0")
+    "5.1.4")
+        # 基于 userdocs 的 release-5.1.4_v2.0.12 构建 [citation:5]
         case "$arch_tag" in
             "aarch64")
-                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-5.2.0_v1.2.20/aarch64-qbittorrent-nox"
+                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-5.1.4_v2.0.12/aarch64-qbittorrent-nox"
                 ;;
             "x86_64")
-                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-5.2.0_v1.2.20/x86_64-qbittorrent-nox"
+                url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-5.1.4_v2.0.12/x86_64-qbittorrent-nox"
                 ;;
         esac
         ;;
