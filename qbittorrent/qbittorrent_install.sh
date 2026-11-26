@@ -108,7 +108,6 @@ case "$qb_version" in
         esac
         ;;
     "5.1.4")
-        # 基于 userdocs 的 release-5.1.4_v2.0.12 构建 [citation:5]
         case "$arch_tag" in
             "aarch64")
                 url="https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-5.1.4_v2.0.12/aarch64-qbittorrent-nox"
@@ -157,7 +156,38 @@ echo -e "${GREEN}服务已启动${NC}"
 echo -e "${YELLOW}服务状态如下：${NC}"
 systemctl status qbittorrent --no-pager
 
+# ================= 5.1.4 提取临时密码 =================
+if [[ "$qb_version" == "5.1.4" ]]; then
+    echo -e "\n${BLUE}等待 5 秒以获取 qBittorrent 5.1.4 临时密码...${NC}"
+    sleep 5
+
+    # 从 journalctl 日志中提取临时密码（qBittorrent 5.x 启动时会打印临时密码）
+    temp_password=$(journalctl -u qbittorrent --no-pager -n 100 2>/dev/null \
+        | grep -iE "temporary password" \
+        | tail -n 1 \
+        | sed -E 's/.*temporary password[^:]*:[[:space:]]*//I' \
+        | tr -d '\r' \
+        | xargs)
+
+    if [[ -n "$temp_password" ]]; then
+        echo -e "${GREEN}========================================${NC}"
+        echo -e "${GREEN}  qBittorrent 5.1.4 临时登录密码:${NC}"
+        echo -e "${YELLOW}  ${temp_password}${NC}"
+        echo -e "${GREEN}========================================${NC}"
+        echo -e "${YELLOW}提示：首次登录 WebUI 请使用用户名 admin 和上述临时密码。${NC}"
+        echo -e "${YELLOW}登录后请及时在 WebUI 中修改密码。${NC}"
+    else
+        echo -e "${YELLOW}未在日志中自动提取到临时密码，请手动查看：${NC}"
+        echo -e "${YELLOW}  journalctl -u qbittorrent --no-pager -n 50${NC}"
+        echo -e "${YELLOW}或查看服务状态输出中的 'temporary password' 行。${NC}"
+    fi
+fi
+
 echo -e "\n${GREEN}安装完成！${NC}"
 echo -e "${YELLOW}已安装版本: qBittorrent $qb_version${NC}"
 echo -e "${YELLOW}默认 WebUI 端口通常为: 8080${NC}"
-echo -e "${YELLOW}默认用户名: admin , 默认密码: adminadmin (新版本可能在日志中生成临时密码，请留意上方状态栏)${NC}"
+if [[ "$qb_version" == "5.1.4" ]]; then
+    echo -e "${YELLOW}默认用户名: admin ，密码为上方提取的临时密码（若未提取到请查看日志）。${NC}"
+else
+    echo -e "${YELLOW}默认用户名: admin , 默认密码: adminadmin${NC}"
+fi
